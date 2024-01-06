@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "154238924613",
+    "project_id": "geo-farm-bogobogo-sort",
+    "storage_bucket": "geo-farm-bogobogo-sort.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:154238924613:android:944fe1c1fb9632531c302c",
+        "android_client_info": {
+          "package_name": "com.example.geo_farm"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAO0SdwIIzZ5T6Obj5xK_GKeYPxvKRsFM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
