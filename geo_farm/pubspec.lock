@@ -160,6 +160,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.8"
+  responsive_sizer:
+    dependency: "direct main"
+    description:
+      name: responsive_sizer
+      sha256: be6af5923b99e4844699c991c3cba4441cc016ed34bb7da49c60a15fb41cc550
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0+1"
   sky_engine:
     dependency: transitive
     description: flutter
