@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore
 import 'main_menu.dart';
@@ -16,7 +15,6 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _reenterPasswordController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
   final CollectionReference _usersCollection = FirebaseFirestore.instance.collection('users'); // Firestore collection reference
 
   @override
@@ -63,13 +61,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   _register();
                 },
                 child: Text('Register'),
-              ),
-              SizedBox(height: 16.0),
-              ElevatedButton(
-                onPressed: () {
-                  _registerWithGoogle();
-                },
-                child: Text('Register with Google'),
               ),
             ],
           ),
@@ -121,25 +112,6 @@ class _RegisterPageState extends State<RegisterPage> {
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
         );
-    }
-  }
-
-  void _registerWithGoogle() async {
-    try {
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      final GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
-      final AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
-      UserCredential userCredential = await _auth.signInWithCredential(credential);
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => MainMenu()),
-      );
-    } catch (e) {
-      // Registration with Google failed, handle the error
-      print(e.toString());
     }
   }
 }
