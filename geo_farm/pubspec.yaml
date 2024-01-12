@@ -38,8 +38,10 @@ dependencies:
   fluttertoast: ^8.2.2
   font_awesome_flutter: ^10.6.0
   google_sign_in: ^6.1.5
+  google_maps_flutter: any
   flutter_map: ^1.1.1
   latlong2: any
+  test: any
   #user_location: any
 
 dev_dependencies:

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore
 import 'main_menu.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -12,7 +14,10 @@ class _RegisterPageState extends State<RegisterPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _reenterPasswordController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final CollectionReference _usersCollection = FirebaseFirestore.instance.collection('users'); // Firestore collection reference
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +32,12 @@ class _RegisterPageState extends State<RegisterPage> {
             mainAxisAlignment: MainAxisAlignment.center, // Center the column vertically
             children: [
               TextField(
+                controller: _usernameController,
+                decoration: InputDecoration(
+                  labelText: 'Username',
+                ),
+              ),
+              TextField(
                 controller: _emailController,
                 decoration: InputDecoration(
                   labelText: 'Email',
@@ -36,6 +47,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 controller: _passwordController,
                 decoration: InputDecoration(
                   labelText: 'Password',
+                ),
+                obscureText: true,
+              ),
+              TextField(
+                controller: _reenterPasswordController,
+                decoration: InputDecoration(
+                  labelText: 'Re-enter Password',
                 ),
                 obscureText: true,
               ),
@@ -62,18 +80,47 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void _register() async {
     try {
+      String email = _emailController.text;
+      String password = _passwordController.text;
+      String reenterPassword = _reenterPasswordController.text;
+      String username = _usernameController.text;
+
+      // Validate re-entered password
+      if (password != reenterPassword) {
+        // Passwords do not match, handle the error
+        Fluttertoast.showToast(
+          msg: 'Passwords do not match',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+        );
+        return;
+      }
+
       UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
+        email: email,
+        password: password,
       );
+
+      // Additional data (username)
+      await userCredential.user!.updateDisplayName(username);
+
+      // Add user data to Firestore collection
+      await _usersCollection.doc(email).set({
+        'username': username,
+        'registrationDate': DateTime.now(),
+      });
+
       // Registration successful, do something with the userCredential
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => MainMenu()),
       );
     } catch (e) {
-      // Registration failed, handle the error
-      print(e.toString());
+      Fluttertoast.showToast(
+          msg: e.toString(),
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+        );
     }
   }
 

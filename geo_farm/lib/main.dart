@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-//import 'package:geo_farm/page/starting.dart';
-// import 'package:geo_farm/page/land_maps.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:geo_farm/page/starting.dart';
 import 'package:geo_farm/firebase_options.dart';
@@ -11,7 +9,7 @@ Future main() async{
       options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(MyApp());
-  }
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.

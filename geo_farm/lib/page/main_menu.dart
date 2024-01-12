@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:geo_farm/page/action_plan.dart';
+import 'package:geo_farm/page/choose_expert.dart';
+import 'package:geo_farm/page/starting.dart';
+//import 'talk_with_expert.dart';
 
 class MainMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final User? user = FirebaseAuth.instance.currentUser;
+
+    if (user == null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => StartingWidget()),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Main Menu'),
@@ -28,13 +42,19 @@ class MainMenu extends StatelessWidget {
               _buildButton(
                 text: 'Talk with Expert',
                 onPressed: () {
-                  // Handle 'Talk with Expert' button press
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ChooseExpertPage()),
+                    );
                 },
               ),
               _buildButton(
                 text: 'Action Plan',
                 onPressed: () {
-                  // Handle 'Action Plan' button press
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ActionPlanPage()),
+                    );
                 },
               ),
             ],
