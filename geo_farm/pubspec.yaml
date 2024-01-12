@@ -31,12 +31,16 @@ dependencies:
   flutter:
     sdk: flutter
   responsive_sizer: ^1.0.0
-
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
-  firebase_core: ^2.24.2
+  firebase_core: any
+  cloud_firestore: ^4.8.2
+  firebase_auth: ^4.6.3
+  firebase_storage: ^11.2.4
+  fluttertoast: ^8.2.2
+  font_awesome_flutter: ^10.6.0
+  google_sign_in: ^6.1.5
+  flutter_map: ^1.1.1
+  latlong2: any
+  #user_location: any
 
 dev_dependencies:
   flutter_test:
@@ -90,3 +94,9 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages  
+
+pdfx: 
+  git:
+   url: 'https://github.com/ScerIO/packages.flutter' 
+   ref: '4be9de9ffed5398fd7d5f44bbb07dcd3d3f1711b'  
+   path: packages/pdfx

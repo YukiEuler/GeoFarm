@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'login.dart';
+import 'register.dart';
 
 class StartingWidget extends StatelessWidget {
   const StartingWidget({Key? key});
@@ -31,7 +33,7 @@ class StartingWidget extends StatelessWidget {
                     // Handle login logic here
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const StartingWidget()), // TODO: Replace to Login
+                      MaterialPageRoute(builder: (context) => LoginPage()),
                     );
                   },
                 ),
@@ -44,7 +46,7 @@ class StartingWidget extends StatelessWidget {
                     // Handle register logic here
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const StartingWidget()), // TODO: Replace to Register
+                      MaterialPageRoute(builder: (context) => RegisterPage()),
                     );
                   },
                 ),
@@ -68,20 +70,23 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: min(min(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height)/2, 240),
-      height: min(min(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height)/8, 60),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        color: const Color.fromRGBO(97, 135, 110, 1),
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        primary: const Color.fromRGBO(97, 135, 110, 1),
+        minimumSize: Size(
+          min(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height) / 2,
+          min(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height) / 8,
+        ),
       ),
-      child: Center(
-        child: Text(
-          text,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-          ),
+      child: Text(
+        text,
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 20,
         ),
       ),
     );
