@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'dart:math';
 
 class LandMapsPage extends StatefulWidget {
   const LandMapsPage({Key? key}) : super(key: key);
@@ -20,18 +21,37 @@ class _LandMapsPageState extends State<LandMapsPage> {
     mapController = controller;
   }
 
+  double toRadians(double degree){
+    return pi/180*degree;
+  }
+
+  double polarTriangleArea(double tan1, double lng1, double tan2, double lng2) {
+    double deltaLng = lng1 - lng2;
+    double t = tan1 * tan2;
+    return 2 * atan2(t * sin(deltaLng), 1 + t * cos(deltaLng));
+  }
+
   void _calculateArea() {
+    const double radius = 6371009;
     double area = 0.0;
     for (Polygon polygon in _polygons) {
       List<LatLng> points = polygon.points;
-      for (int i = 0; i < points.length - 1; i++) {
-        LatLng p1 = points[i];
-        LatLng p2 = points[i + 1];
-        area += (p2.latitude - p1.latitude) * (p2.longitude + p1.longitude);
+      int size = points.length;
+      if (size >= 3) {
+        LatLng prev = points[size - 1];
+        double prevTanLat = tan((pi / 2 - toRadians(prev.latitude)) / 2);
+        double prevLng = toRadians(prev.longitude);
+        for (LatLng point in points) {
+          double tanLat = tan((pi / 2 - toRadians(point.latitude)) / 2);
+          double lng = toRadians(point.longitude);
+          area += polarTriangleArea(tanLat, lng, prevTanLat, prevLng);
+          prevTanLat = tanLat;
+          prevLng = lng;
+        }
       }
     }
     setState(() {
-      _area = (area.abs() / 2) * 111319.9; // Convert to square meters
+      _area = (area * (radius * radius)).abs(); // SphericalUtilTest
     });
   }
 
