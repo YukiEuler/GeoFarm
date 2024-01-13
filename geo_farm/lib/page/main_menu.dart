@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:geo_farm/page/action_plan.dart';
 import 'package:geo_farm/page/choose_expert.dart';
+import 'package:geo_farm/page/land_maps.dart';
 import 'package:geo_farm/page/starting.dart';
 //import 'talk_with_expert.dart';
 
@@ -30,7 +31,10 @@ class MainMenu extends StatelessWidget {
               _buildButton(
                 text: 'Land Maps',
                 onPressed: () {
-                  // Handle 'Land Maps' button press
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => LandMapsPage()),
+                    );
                 },
               ),
               _buildButton(
