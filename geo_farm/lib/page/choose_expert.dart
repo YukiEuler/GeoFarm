@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'talk_with_expert.dart';
 
 class ChooseExpertPage extends StatefulWidget {
+  const ChooseExpertPage({super.key});
+
   @override
   _ChooseExpertPageState createState() => _ChooseExpertPageState();
 }
@@ -20,7 +22,7 @@ class _ChooseExpertPageState extends State<ChooseExpertPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Choose Expert'),
+        title: const Text('Choose Expert'),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('pakar').snapshots(),
@@ -49,7 +51,7 @@ class _ChooseExpertPageState extends State<ChooseExpertPage> {
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }
         },
       ),

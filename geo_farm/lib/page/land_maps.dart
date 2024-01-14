@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'land_maps_circle.dart';
 import 'dart:math';
 
 class LandMapsPage extends StatefulWidget {
@@ -13,7 +14,7 @@ class _LandMapsPageState extends State<LandMapsPage> {
   late GoogleMapController mapController;
   Set<Polygon> _polygons = {}; // Store the created polygons
   double _area = 0.0; // Store the calculated area
-  bool _afterReset = false;
+  bool _afterReset = false; // Store the state after first reset
 
   final LatLng _center = const LatLng(-6.98278742501218, 110.41159620896708);
 
@@ -100,7 +101,7 @@ class _LandMapsPageState extends State<LandMapsPage> {
                     }
                     _polygons = {
                       Polygon(
-                        polygonId: PolygonId('polygon'),
+                        polygonId: const PolygonId('polygon'),
                         points: points,
                         strokeWidth: 2,
                         strokeColor: Colors.red,
@@ -117,7 +118,7 @@ class _LandMapsPageState extends State<LandMapsPage> {
               left: 16,
               child: Text(
                 'Area: $_area',
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               ),
             ),
             Positioned(
@@ -125,7 +126,20 @@ class _LandMapsPageState extends State<LandMapsPage> {
               right: 16,
               child: ElevatedButton(
                 onPressed: _resetPolygon,
-                child: Text('Reset'),
+                child: const Text('Reset'),
+              ),
+            ),
+            Positioned(
+              bottom: 16,
+              right: 96,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LandMapsCirclePage()),
+                  );
+                },
+                child: const Text('Switch to Circle Page'),
               ),
             ),
           ],

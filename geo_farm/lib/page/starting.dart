@@ -4,7 +4,7 @@ import 'login.dart';
 import 'register.dart';
 
 class StartingWidget extends StatelessWidget {
-  const StartingWidget({Key? key});
+  const StartingWidget({super.key, Key? customKey});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class StartingWidget extends StatelessWidget {
                     // Handle login logic here
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => LoginPage()),
+                      MaterialPageRoute(builder: (context) => const LoginPage()),
                     );
                   },
                 ),
@@ -46,7 +46,7 @@ class StartingWidget extends StatelessWidget {
                     // Handle register logic here
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => RegisterPage()),
+                      MaterialPageRoute(builder: (context) => const RegisterPage()),
                     );
                   },
                 ),
@@ -60,7 +60,7 @@ class StartingWidget extends StatelessWidget {
 }
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({
+  const CustomButton({super.key, 
     required this.text,
     required this.onPressed,
   });
@@ -76,11 +76,13 @@ class CustomButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
-        primary: const Color.fromRGBO(97, 135, 110, 1),
+        backgroundColor: const Color.fromRGBO(97, 135, 110, 1),
         minimumSize: Size(
           min(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height) / 2,
           min(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height) / 8,
         ),
+        shadowColor: Colors.black.withOpacity(0.5), // Add shadow color
+        elevation: 20, // Add elevation for shadow effect
       ),
       child: Text(
         text,

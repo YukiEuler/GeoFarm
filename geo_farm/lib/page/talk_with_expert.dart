@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 class ChatPage extends StatefulWidget {
   final String chatRoomId;
 
-  ChatPage({required this.chatRoomId});
+  const ChatPage({super.key, required this.chatRoomId});
 
   @override
   _ChatPageState createState() => _ChatPageState();
@@ -34,7 +34,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chat Room'),
+        title: const Text('Chat Room'),
       ),
       body: Column(
         children: [
@@ -48,7 +48,7 @@ class _ChatPageState extends State<ChatPage> {
                   .snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 }
@@ -71,19 +71,19 @@ class _ChatPageState extends State<ChatPage> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
                 Expanded(
                   child: TextField(
                     controller: _messageController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Type a message...',
                     ),
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.send),
+                  icon: const Icon(Icons.send),
                   onPressed: () {
                     String messageText = _messageController.text.trim();
                     if (messageText.isNotEmpty) {

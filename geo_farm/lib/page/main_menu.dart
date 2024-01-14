@@ -7,6 +7,8 @@ import 'package:geo_farm/page/starting.dart';
 //import 'talk_with_expert.dart';
 
 class MainMenu extends StatelessWidget {
+  const MainMenu({super.key});
+
   @override
   Widget build(BuildContext context) {
     final User? user = FirebaseAuth.instance.currentUser;
@@ -14,7 +16,7 @@ class MainMenu extends StatelessWidget {
     if (user == null) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => StartingWidget()),
+        MaterialPageRoute(builder: (context) => const StartingWidget()),
       );
     }
 
@@ -33,7 +35,7 @@ class MainMenu extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => LandMapsPage()),
+                      MaterialPageRoute(builder: (context) => const LandMapsPage()),
                     );
                 },
               ),
@@ -48,7 +50,7 @@ class MainMenu extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ChooseExpertPage()),
+                      MaterialPageRoute(builder: (context) => const ChooseExpertPage()),
                     );
                 },
               ),
@@ -57,7 +59,7 @@ class MainMenu extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ActionPlanPage()),
+                      MaterialPageRoute(builder: (context) => const ActionPlanPage()),
                     );
                 },
               ),
@@ -73,15 +75,15 @@ class MainMenu extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16.0), // Add margin to the left and right side
       child: ElevatedButton(
         onPressed: onPressed,
-        child: Text(
-          text,
-          style: TextStyle(fontSize: 20), // Set the font size of the button text
-        ),
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0), // Set the border radius
           ),
-          minimumSize: Size(double.infinity, 100), // Set the minimum size of the button
+          minimumSize: const Size(double.infinity, 100), // Set the minimum size of the button
+        ),
+        child: Text(
+          text,
+          style: const TextStyle(fontSize: 20), // Set the font size of the button text
         ),
       ),
     );

@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class ActionPlanPage extends StatefulWidget {
+  const ActionPlanPage({super.key});
+
   @override
   _ActionPlanPageState createState() => _ActionPlanPageState();
 }
@@ -12,7 +14,7 @@ class _ActionPlanPageState extends State<ActionPlanPage> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   String? userEmail = '';
-  TextEditingController _actionPlanController = TextEditingController();
+  final TextEditingController _actionPlanController = TextEditingController();
 
   @override
   void initState() {
@@ -46,7 +48,7 @@ class _ActionPlanPageState extends State<ActionPlanPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Action Plan'),
+        title: const Text('Action Plan'),
       ),
       body: Column(
         children: [
@@ -55,7 +57,7 @@ class _ActionPlanPageState extends State<ActionPlanPage> {
             onChanged: (value) {
               // Store the value in a variable or state
             },
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               labelText: 'Add an Action Plan',
             ),
           ),
@@ -65,14 +67,14 @@ class _ActionPlanPageState extends State<ActionPlanPage> {
               addToDoItem(actionPlan);
               _actionPlanController.clear();
             },
-            child: Text('Add'),
+            child: const Text('Add'),
           ),
           Expanded(
             child: FutureBuilder<List<DocumentSnapshot>>(
               future: getUserActionPlan(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
+                  return const CircularProgressIndicator();
                 } else if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');
                 } else {
