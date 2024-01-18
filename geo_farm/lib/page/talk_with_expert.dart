@@ -13,21 +13,39 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   final TextEditingController _messageController = TextEditingController();
+  late List<String> email;
   late String _senderId;
 
   @override
   void initState() {
     super.initState();
-    _getCurrentUser();
-  }
-
-  void _getCurrentUser() {
+    print(widget.chatRoomId);
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       setState(() {
         _senderId = user.email!;
       });
     }
+    email = widget.chatRoomId.split('-');
+    final String pakarId = email[1];
+
+    // Add data into 'pakarHistoryChat' collection if it's the first message
+    FirebaseFirestore.instance
+        .collection('pakarHistoryChat')
+        .doc(widget.chatRoomId)
+        .get()
+        .then((docSnapshot) {
+      if (!docSnapshot.exists) {
+        FirebaseFirestore.instance
+            .collection('pakarHistoryChat')
+            .doc(pakarId)
+            .set({
+          'chatRoomId': widget.chatRoomId,
+          'senderId': _senderId,
+          'timestamp': FieldValue.serverTimestamp(),
+        });
+      }
+    });
   }
 
   @override

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'main_menu.dart';
+import 'package:geo_farm/page/main_menu.dart';
+import 'package:geo_farm/page/main_menu_experts.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -131,10 +133,25 @@ class _LoginPageState extends State<LoginPage> {
         password: _passwordController.text,
       );
       // Handle successful login
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const MainMenu()),
-      );
+      bool isExpert = false;
+      FirebaseFirestore.instance.collection('pakar').snapshots().forEach((snapshot) {
+        snapshot.docs.forEach((doc) {
+          if (doc.id == _emailController.text) {
+            isExpert = true;
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const MainMenuExperts()),
+            );
+            return;
+          }
+        });
+      });
+      if (!isExpert){
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const MainMenu()),
+        );
+      }
     } catch (e) {
       Fluttertoast.showToast(
         msg: e.toString(),
