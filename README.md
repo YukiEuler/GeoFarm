@@ -14,8 +14,14 @@ But what if we could bridge this gap with the power of technology? Introducing t
 No longer tethered to the availability of extension workers, farmers can now access expert advice on demand. Imagine a platform buzzing with virtual consultations, where tailored action plans are crafted based on each farm's individual needs. From optimal crop selection to pest control strategies, the platform empowers farmers to make informed decisions, maximizing their yields and unlocking the full potential of their land.
 
 This is not just a technological marvel; it's a revolution in agricultural empowerment. By democratizing access to knowledge, we bridge the divide between isolated farmers and the expertise they crave. With each virtual consultation, we sow the seeds of a transformed agricultural landscape, one teeming with productivity and brimming with the fruits of informed action. The digital consultation platform: a potent force for prosperity, born from the fertile ground of data and empowered by the tireless spirit of human ingenuity.
-  
-# Fitur-Fitur GeoFarm
+
+# Installation
+1. Clone this repository using `git clone https://github.com/YukiEuler/GeoFarm`
+2. Change directories using `cd geo_farm`
+3. Install all dependencies using `flutter pub get`
+4. Run project using `flutter run`
+   
+# GeoFarm Features
 ## Home Page
 ![home](https://github.com/YukiEuler/GeoFarm/blob/main/assets/HomePage.png)
 
@@ -30,7 +36,7 @@ This is not just a technological marvel; it's a revolution in agricultural empow
 
 # Land Maps
 ![poly](https://github.com/YukiEuler/GeoFarm/blob/main/assets/MapPolygon.png)
-![circ]((https://github.com/YukiEuler/GeoFarm/blob/main/assets/MapCircle.png))
+![circ](https://github.com/YukiEuler/GeoFarm/blob/main/assets/MapCircle.png)
 
 # Plant Recommendation
 ![rec](https://github.com/YukiEuler/GeoFarm/blob/main/assets/PlantRecommendation.png)
