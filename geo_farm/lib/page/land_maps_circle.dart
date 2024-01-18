@@ -116,7 +116,7 @@ class _LandMapsCirclePageState extends State<LandMapsCirclePage> {
               ),
             ),
             Positioned(
-              bottom: 16,
+              top: 16,
               left: 16,
               child: Text(
                 'Area: $_area',
@@ -125,30 +125,33 @@ class _LandMapsCirclePageState extends State<LandMapsCirclePage> {
             ),
             Positioned(
               bottom: 16,
+              left: 16,
+              child: ElevatedButton(
+                  onPressed: _resetCircle,
+                  child: const Text('Reset'),
+                )
+            ),
+            Positioned(
+              bottom: 16,
               right: 16,
-              child: Column(
-                children: [
-                  ElevatedButton(
-                    onPressed: _resetCircle,
-                    child: const Text('Reset'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const LandMapsPage()),
-                      );
-                    },
-                    child: const Text('Switch to Polygon Page'),
-                  ),
-                  const SizedBox(height: 8),
-                  Slider(
-                    value: _radius,
-                    min: 0,
-                    max: 500,
-                    onChanged: _updateRadius,
-                  ),
-                ],
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LandMapsPage()),
+                  );
+                },
+                child: const Text('Switch to Polygon Page'),
+              ),
+            ),
+            Positioned(
+              top: 16,
+              right: 16,
+              child: Slider(
+                value: _radius,
+                min: 0,
+                max: 500,
+                onChanged: _updateRadius,
               ),
             ),
           ],

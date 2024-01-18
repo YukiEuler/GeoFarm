@@ -4,7 +4,7 @@ import 'package:geo_farm/page/action_plan.dart';
 import 'package:geo_farm/page/choose_expert.dart';
 import 'package:geo_farm/page/land_maps.dart';
 import 'package:geo_farm/page/starting.dart';
-//import 'talk_with_expert.dart';
+import 'package:geo_farm/page/plant_recomendation.dart';
 
 class MainMenu extends StatelessWidget {
   const MainMenu({super.key});
@@ -42,7 +42,10 @@ class MainMenu extends StatelessWidget {
               _buildButton(
                 text: 'Plant Schedule',
                 onPressed: () {
-                  // Handle 'Plant Schedule' button press
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => PlantRecommendationPage()),
+                    );
                 },
               ),
               _buildButton(
@@ -72,18 +75,31 @@ class MainMenu extends StatelessWidget {
 
   Widget _buildButton({required String text, required VoidCallback onPressed}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0), // Add margin to the left and right side
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.0), // Set the border radius
-          ),
-          minimumSize: const Size(double.infinity, 100), // Set the minimum size of the button
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+              colors: [Color(0xFF61876E), Color(0xFF123456)],
+              // begin: Alignment.topLeft,
+              // end: Alignment.bottomRight,
+            ),
         ),
-        child: Text(
-          text,
-          style: const TextStyle(fontSize: 20), // Set the font size of the button text
+        child: ElevatedButton(
+          onPressed: onPressed,
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(0.0),
+            ),
+            minimumSize: const Size(double.infinity, 100),
+            // Add a color gradient for the button background
+          ),
+          child: Text(
+            text,
+            style: const TextStyle(
+              fontSize: 20,
+              fontFamily: 'Inter',
+            ),
+          ),
         ),
       ),
     );

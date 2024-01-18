@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class ActionPlanPage extends StatefulWidget {
-  const ActionPlanPage({super.key});
+  const ActionPlanPage({Key? key}) : super(key: key);
 
   @override
   _ActionPlanPageState createState() => _ActionPlanPageState();
@@ -36,12 +36,12 @@ class _ActionPlanPageState extends State<ActionPlanPage> {
     });
   }
 
-  Future<List<DocumentSnapshot>> getUserActionPlan() async {
-    QuerySnapshot querySnapshot = await _firestore
+  Stream<List<DocumentSnapshot>> getUserActionPlan() {
+    return _firestore
         .collection('todos')
         .where('email', isEqualTo: userEmail)
-        .get();
-    return querySnapshot.docs;
+        .snapshots()
+        .map((snapshot) => snapshot.docs);
   }
 
   @override
@@ -70,8 +70,8 @@ class _ActionPlanPageState extends State<ActionPlanPage> {
             child: const Text('Add'),
           ),
           Expanded(
-            child: FutureBuilder<List<DocumentSnapshot>>(
-              future: getUserActionPlan(),
+            child: StreamBuilder<List<DocumentSnapshot>>(
+              stream: getUserActionPlan(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const CircularProgressIndicator();

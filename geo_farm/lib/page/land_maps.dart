@@ -114,7 +114,7 @@ class _LandMapsPageState extends State<LandMapsPage> {
               ),
             ),
             Positioned(
-              bottom: 16,
+              top: 16, // Move the area text to the top
               left: 16,
               child: Text(
                 'Area: $_area',
@@ -123,7 +123,7 @@ class _LandMapsPageState extends State<LandMapsPage> {
             ),
             Positioned(
               bottom: 16,
-              right: 16,
+              left: 16,
               child: ElevatedButton(
                 onPressed: _resetPolygon,
                 child: const Text('Reset'),
@@ -131,7 +131,7 @@ class _LandMapsPageState extends State<LandMapsPage> {
             ),
             Positioned(
               bottom: 16,
-              right: 96,
+              right: 16,
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(

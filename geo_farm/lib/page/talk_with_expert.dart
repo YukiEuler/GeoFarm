@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 class ChatPage extends StatefulWidget {
   final String chatRoomId;
 
-  const ChatPage({super.key, required this.chatRoomId});
+  const ChatPage({Key? key, required this.chatRoomId}) : super(key: key);
 
   @override
   _ChatPageState createState() => _ChatPageState();
@@ -61,9 +61,32 @@ class _ChatPageState extends State<ChatPage> {
                   reverse: true,
                   itemCount: messages.length,
                   itemBuilder: (context, index) {
+                    final message = messages[index];
+                    final isSentByCurrentUser =
+                        message['senderId'] == _senderId;
+
                     return ListTile(
-                      title: Text(messages[index]['text']),
-                      subtitle: Text(messages[index]['senderId']),
+                      title: Container(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 10,
+                          horizontal: 14,
+                        ),
+                        decoration: BoxDecoration(
+                          color: isSentByCurrentUser
+                              ? Colors.blue
+                              : Colors.grey[300],
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Text(
+                          message['text'],
+                          style: TextStyle(
+                            color: isSentByCurrentUser
+                                ? Colors.white
+                                : Colors.black,
+                          ),
+                        ),
+                      ),
+                      subtitle: Text(message['senderId']),
                     );
                   },
                 );

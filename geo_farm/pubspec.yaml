@@ -42,6 +42,7 @@ dependencies:
   flutter_map: ^1.1.1
   latlong2: any
   test: any
+  flutter_svg: any
   #user_location: any
 
 dev_dependencies:
