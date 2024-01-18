@@ -39,6 +39,7 @@ dependencies:
   font_awesome_flutter: ^10.6.0
   google_sign_in: ^6.1.5
   google_maps_flutter: any
+  google_maps_flutter_android: any
   flutter_map: ^1.1.1
   latlong2: any
   test: any
